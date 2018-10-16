@@ -1,5 +1,14 @@
-module.exports =
-/******/ (function(modules) { // webpackBootstrap
+(function webpackUniversalModuleDefinition(root, factory) {
+	if(typeof exports === 'object' && typeof module === 'object')
+		module.exports = factory();
+	else if(typeof define === 'function' && define.amd)
+		define([], factory);
+	else if(typeof exports === 'object')
+		exports["vue-glide"] = factory();
+	else
+		root["vue-glide"] = factory();
+})((typeof self !== 'undefined' ? self : this), function() {
+return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
 /******/
@@ -2019,7 +2028,6 @@ var es6_number_constructor = __webpack_require__("c5f6");
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/@vue/cli-plugin-babel/node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/GlideAnimation.vue?vue&type=script&lang=js&
 
 
-
 /* harmony default export */ var GlideAnimationvue_type_script_lang_js_ = ({
   name: 'GlideAnimation',
   mixins: [render],
@@ -2154,7 +2162,6 @@ function _slicedToArray(arr, i) {
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/@vue/cli-plugin-babel/node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/GlideIntersection.vue?vue&type=script&lang=js&
 
 
-
 /* harmony default export */ var GlideIntersectionvue_type_script_lang_js_ = ({
   name: 'GlideIntersection',
   mixins: [render],
@@ -2255,6 +2262,7 @@ var GlideIntersection_component = normalizeComponent(
 GlideIntersection_component.options.__file = "GlideIntersection.vue"
 /* harmony default export */ var GlideIntersection = (GlideIntersection_component.exports);
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/@vue/cli-plugin-babel/node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/GlideParallax.vue?vue&type=script&lang=js&
+
 //
 //
 //
@@ -2551,4 +2559,5 @@ module.exports = '\x09\x0A\x0B\x0C\x0D\x20\xA0\u1680\u180E\u2000\u2001\u2002\u20
 /***/ })
 
 /******/ });
-//# sourceMappingURL=vue-glide.common.js.map
+});
+//# sourceMappingURL=vue-glide.umd.js.map
