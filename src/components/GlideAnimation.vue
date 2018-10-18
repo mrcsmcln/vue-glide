@@ -39,7 +39,11 @@ export default {
       this.animation.currentTime = currentTime
     },
     playbackRate (playbackRate) {
-      this.animation.playbackRate = playbackRate
+      const { animation } = this
+
+      animation.playbackRate = playbackRate
+
+      animation[playbackRate ? 'play' : 'pause']()
     }
   },
   mounted () {
@@ -47,6 +51,10 @@ export default {
     const animation = this.$el.animate(this.keyframes, this.options)
 
     animation.playbackRate = playbackRate
+
+    if (!playbackRate) {
+      animation.pause()
+    }
 
     if (startTime !== null) {
       animation.startTime = startTime

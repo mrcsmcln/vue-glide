@@ -1906,12 +1906,12 @@ var component = normalizeComponent(
 
 component.options.__file = "GlideRect.vue"
 /* harmony default export */ var GlideRect = (component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"545da000-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/GlideParallax.vue?vue&type=template&id=7446f460&
-var GlideParallaxvue_type_template_id_7446f460_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('GlidePosition',{attrs:{"callback":_vm.callback}},[_c('GlideAnimation',{attrs:{"keyframes":_vm.keyframes,"options":{ duration: 1, fill: 'both' },"current-time":_vm.currentTime,"playback-rate":0}},[_vm._t("default")],2)],1)}
-var GlideParallaxvue_type_template_id_7446f460_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"545da000-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/GlideParallax.vue?vue&type=template&id=15092d08&
+var GlideParallaxvue_type_template_id_15092d08_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('GlidePosition',{attrs:{"callback":_vm.callback}},[_c('GlideAnimation',{attrs:{"keyframes":_vm.keyframes,"options":{ duration: 1, fill: 'both' },"current-time":_vm.currentTime,"playback-rate":0}},[_vm._t("default")],2)],1)}
+var GlideParallaxvue_type_template_id_15092d08_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/GlideParallax.vue?vue&type=template&id=7446f460&
+// CONCATENATED MODULE: ./src/components/GlideParallax.vue?vue&type=template&id=15092d08&
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"545da000-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/GlidePosition.vue?vue&type=template&id=70a54433&
 var GlidePositionvue_type_template_id_70a54433_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('GlideRect',{attrs:{"callback":_vm.update}},[_vm._t("default")],2)}
@@ -1921,7 +1921,6 @@ var GlidePositionvue_type_template_id_70a54433_staticRenderFns = []
 // CONCATENATED MODULE: ./src/components/GlidePosition.vue?vue&type=template&id=70a54433&
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/@vue/cli-plugin-babel/node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/GlidePosition.vue?vue&type=script&lang=js&
-
 //
 //
 //
@@ -2028,6 +2027,7 @@ var es6_number_constructor = __webpack_require__("c5f6");
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/@vue/cli-plugin-babel/node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/GlideAnimation.vue?vue&type=script&lang=js&
 
 
+
 /* harmony default export */ var GlideAnimationvue_type_script_lang_js_ = ({
   name: 'GlideAnimation',
   mixins: [render],
@@ -2066,7 +2066,9 @@ var es6_number_constructor = __webpack_require__("c5f6");
       this.animation.currentTime = _currentTime;
     },
     playbackRate: function playbackRate(_playbackRate) {
-      this.animation.playbackRate = _playbackRate;
+      var animation = this.animation;
+      animation.playbackRate = _playbackRate;
+      animation[_playbackRate ? 'play' : 'pause']();
     }
   },
   mounted: function mounted() {
@@ -2077,6 +2079,10 @@ var es6_number_constructor = __webpack_require__("c5f6");
         playbackRate = this.playbackRate;
     var animation = this.$el.animate(this.keyframes, this.options);
     animation.playbackRate = playbackRate;
+
+    if (!playbackRate) {
+      animation.pause();
+    }
 
     if (startTime !== null) {
       animation.startTime = startTime;
@@ -2293,7 +2299,11 @@ GlideIntersection_component.options.__file = "GlideIntersection.vue"
     //   default: 'vertical',
     //   validator: orientation => ['horizontal', 'vertical', 'both'].includes(orientation)
     // },
-    translate: {
+    from: {
+      type: String,
+      default: '0px'
+    },
+    to: {
       type: String,
       default: '0px'
     }
@@ -2305,9 +2315,8 @@ GlideIntersection_component.options.__file = "GlideIntersection.vue"
   },
   computed: {
     keyframes: function keyframes() {
-      var translate = this.translate;
       return {
-        transform: ["translateY(".concat(translate, ")"), "translateY(calc(".concat(translate, " * -1))")]
+        transform: ["translateY(".concat(this.from, ")"), "translateY(".concat(this.to, ")")]
       };
     }
   },
@@ -2330,8 +2339,8 @@ GlideIntersection_component.options.__file = "GlideIntersection.vue"
 
 var GlideParallax_component = normalizeComponent(
   components_GlideParallaxvue_type_script_lang_js_,
-  GlideParallaxvue_type_template_id_7446f460_render,
-  GlideParallaxvue_type_template_id_7446f460_staticRenderFns,
+  GlideParallaxvue_type_template_id_15092d08_render,
+  GlideParallaxvue_type_template_id_15092d08_staticRenderFns,
   false,
   null,
   null,

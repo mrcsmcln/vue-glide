@@ -26,7 +26,11 @@ export default {
     //   default: 'vertical',
     //   validator: orientation => ['horizontal', 'vertical', 'both'].includes(orientation)
     // },
-    translate: {
+    from: {
+      type: String,
+      default: '0px'
+    },
+    to: {
       type: String,
       default: '0px'
     }
@@ -38,12 +42,10 @@ export default {
   },
   computed: {
     keyframes () {
-      const { translate } = this
-
       return {
         transform: [
-          `translateY(${translate})`,
-          `translateY(calc(${translate} * -1))`
+          `translateY(${this.from})`,
+          `translateY(${this.to})`
         ]
       }
     }
