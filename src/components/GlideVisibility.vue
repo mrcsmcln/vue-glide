@@ -12,7 +12,7 @@
 import GlideIntersection from './GlideIntersection.vue'
 
 export default {
-  name: 'GlideReveal',
+  name: 'GlideVisibility',
   components: { GlideIntersection },
   props: {
     name: {
@@ -79,6 +79,10 @@ export default {
       }
 
       if (isIntersecting === this.previousIsIntersecting) {
+        return
+      }
+
+      if (this.persist && !isIntersecting) {
         return
       }
 

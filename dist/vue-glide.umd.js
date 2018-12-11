@@ -2350,17 +2350,18 @@ var GlideParallax_component = normalizeComponent(
 
 GlideParallax_component.options.__file = "GlideParallax.vue"
 /* harmony default export */ var GlideParallax = (GlideParallax_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"545da000-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/GlideVisibility.vue?vue&type=template&id=792a9b88&
-var GlideVisibilityvue_type_template_id_792a9b88_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('GlideIntersection',{class:_vm.className,attrs:{"callback":_vm.callback,"options":_vm.options}},[_vm._t("default")],2)}
-var GlideVisibilityvue_type_template_id_792a9b88_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"545da000-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/GlideVisibility.vue?vue&type=template&id=0743e7b2&
+var GlideVisibilityvue_type_template_id_0743e7b2_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('GlideIntersection',{class:_vm.className,attrs:{"callback":_vm.callback,"options":_vm.options}},[_vm._t("default")],2)}
+var GlideVisibilityvue_type_template_id_0743e7b2_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/GlideVisibility.vue?vue&type=template&id=792a9b88&
+// CONCATENATED MODULE: ./src/components/GlideVisibility.vue?vue&type=template&id=0743e7b2&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es6.function.name.js
 var es6_function_name = __webpack_require__("7f7f");
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/@vue/cli-plugin-babel/node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/GlideVisibility.vue?vue&type=script&lang=js&
+
 
 //
 //
@@ -2374,7 +2375,7 @@ var es6_function_name = __webpack_require__("7f7f");
 //
 
 /* harmony default export */ var GlideVisibilityvue_type_script_lang_js_ = ({
-  name: 'GlideReveal',
+  name: 'GlideVisibility',
   components: {
     GlideIntersection: GlideIntersection
   },
@@ -2445,6 +2446,10 @@ var es6_function_name = __webpack_require__("7f7f");
         return;
       }
 
+      if (this.persist && !isIntersecting) {
+        return;
+      }
+
       this.previousIsIntersecting = isIntersecting;
       this[isIntersecting ? 'enter' : 'leave'](entry);
     },
@@ -2504,8 +2509,8 @@ var es6_function_name = __webpack_require__("7f7f");
 
 var GlideVisibility_component = normalizeComponent(
   components_GlideVisibilityvue_type_script_lang_js_,
-  GlideVisibilityvue_type_template_id_792a9b88_render,
-  GlideVisibilityvue_type_template_id_792a9b88_staticRenderFns,
+  GlideVisibilityvue_type_template_id_0743e7b2_render,
+  GlideVisibilityvue_type_template_id_0743e7b2_staticRenderFns,
   false,
   null,
   null,
