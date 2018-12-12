@@ -19,10 +19,10 @@ export default {
       type: String,
       default: 'v'
     },
-    // appear: {
-    //   type: Boolean,
-    //   default: false
-    // },
+    appear: {
+      type: Boolean,
+      default: false
+    },
     persist: {
       type: Boolean,
       default: false
@@ -51,14 +51,17 @@ export default {
   },
   data () {
     return {
-      previousIsIntersecting: undefined,
-      sides: undefined
+      previousIsIntersecting: undefined
     }
   },
   computed: {
     className () {
       if (!this.css) {
         return null
+      }
+
+      if (this.previousIsIntersecting === undefined) {
+        return
       }
 
       if (this.previousIsIntersecting) {
@@ -72,7 +75,7 @@ export default {
     callback (entry) {
       const { isIntersecting } = entry
 
-      if (this.previousIsIntersecting === undefined) {
+      if (this.previousIsIntersecting === undefined && !this.appear) {
         this.previousIsIntersecting = isIntersecting
 
         return
