@@ -32,6 +32,20 @@ export default {
     }
   },
   watch: {
+    keyframes: {
+      handler () {
+        this.cancel()
+        this.init()
+      },
+      deep: true
+    },
+    options: {
+      handler () {
+        this.cancel()
+        this.init()
+      },
+      deep: true
+    },
     startTime (startTime) {
       this.animation.startTime = startTime
     },
@@ -39,35 +53,48 @@ export default {
       this.animation.currentTime = currentTime
     },
     playbackRate (playbackRate) {
-      const { animation } = this
-
-      animation.playbackRate = playbackRate
-
-      animation[playbackRate ? 'play' : 'pause']()
+      this.animation.playbackRate = playbackRate
     }
   },
   mounted () {
-    const { startTime, currentTime, playbackRate } = this
-    const animation = this.$el.animate(this.keyframes, this.options)
+    this.init()
+  },
+  methods: {
+    cancel () {
+      this.animation.cancel()
+    },
+    finish () {
+      this.animation.finish()
+    },
+    play () {
+      this.animation.play()
+    },
+    pause () {
+      this.animation.pause()
+    },
+    reverse () {
+      this.animation.reverse()
+    },
+    init () {
+      this.animation = this.$el.animate(this.keyframes, this.options)
 
-    animation.playbackRate = playbackRate
+      const { animation, startTime, currentTime, playbackRate } = this
 
-    if (!playbackRate) {
-      animation.pause()
+      animation.playbackRate = playbackRate
+
+      if (startTime !== null) {
+        animation.startTime = startTime
+      }
+
+      if (currentTime !== null) {
+        animation.currentTime = currentTime
+      }
+
+      animation.addEventListener('finish', () => this.$emit('finish'))
+      animation.addEventListener('cancel', () => this.$emit('cancel'))
+
+      this.animation = animation
     }
-
-    if (startTime !== null) {
-      animation.startTime = startTime
-    }
-
-    if (currentTime !== null) {
-      animation.currentTime = currentTime
-    }
-
-    animation.addEventListener('finish', () => this.$emit('finish'))
-    animation.addEventListener('cancel', () => this.$emit('cancel'))
-
-    this.animation = animation
   }
 }
 </script>

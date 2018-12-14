@@ -2059,6 +2059,20 @@ var es6_number_constructor = __webpack_require__("c5f6");
     };
   },
   watch: {
+    keyframes: {
+      handler: function handler() {
+        this.cancel();
+        this.init();
+      },
+      deep: true
+    },
+    options: {
+      handler: function handler() {
+        this.cancel();
+        this.init();
+      },
+      deep: true
+    },
     startTime: function startTime(_startTime) {
       this.animation.startTime = _startTime;
     },
@@ -2066,39 +2080,54 @@ var es6_number_constructor = __webpack_require__("c5f6");
       this.animation.currentTime = _currentTime;
     },
     playbackRate: function playbackRate(_playbackRate) {
-      var animation = this.animation;
-      animation.playbackRate = _playbackRate;
-      animation[_playbackRate ? 'play' : 'pause']();
+      this.animation.playbackRate = _playbackRate;
     }
   },
   mounted: function mounted() {
-    var _this = this;
+    this.init();
+  },
+  methods: {
+    cancel: function cancel() {
+      this.animation.cancel();
+    },
+    finish: function finish() {
+      this.animation.finish();
+    },
+    play: function play() {
+      this.animation.play();
+    },
+    pause: function pause() {
+      this.animation.pause();
+    },
+    reverse: function reverse() {
+      this.animation.reverse();
+    },
+    init: function init() {
+      var _this = this;
 
-    var startTime = this.startTime,
-        currentTime = this.currentTime,
-        playbackRate = this.playbackRate;
-    var animation = this.$el.animate(this.keyframes, this.options);
-    animation.playbackRate = playbackRate;
+      this.animation = this.$el.animate(this.keyframes, this.options);
+      var animation = this.animation,
+          startTime = this.startTime,
+          currentTime = this.currentTime,
+          playbackRate = this.playbackRate;
+      animation.playbackRate = playbackRate;
 
-    if (!playbackRate) {
-      animation.pause();
+      if (startTime !== null) {
+        animation.startTime = startTime;
+      }
+
+      if (currentTime !== null) {
+        animation.currentTime = currentTime;
+      }
+
+      animation.addEventListener('finish', function () {
+        return _this.$emit('finish');
+      });
+      animation.addEventListener('cancel', function () {
+        return _this.$emit('cancel');
+      });
+      this.animation = animation;
     }
-
-    if (startTime !== null) {
-      animation.startTime = startTime;
-    }
-
-    if (currentTime !== null) {
-      animation.currentTime = currentTime;
-    }
-
-    animation.addEventListener('finish', function () {
-      return _this.$emit('finish');
-    });
-    animation.addEventListener('cancel', function () {
-      return _this.$emit('cancel');
-    });
-    this.animation = animation;
   }
 });
 // CONCATENATED MODULE: ./src/components/GlideAnimation.vue?vue&type=script&lang=js&
