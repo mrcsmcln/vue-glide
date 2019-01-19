@@ -13,35 +13,12 @@ export default {
       type: Object,
       default: () => ({})
     }
-    // root: {
-    //   type: Element,
-    //   default: null
-    // },
-    // rootMargin: {
-    //   type: String,
-    //   default: '0px'
-    // },
-    // threshold: {
-    //   type: [Number, Array],
-    //   default: 0
-    // },
   },
   data () {
     return {
-      // isIntersecting: undefined,
       intersectionObserver: undefined
     }
   },
-  // computed: {
-  //   options () {
-  //     return {
-  //       root: this.root,
-  //       rootMargin: this.rootMargin,
-  //       threshold: this.threshold instanceof Array
-  //         ? this.threshold.slice(0) : this.threshold
-  //     }
-  //   }
-  // },
   watch: {
     options: 'reset',
     callback: 'reset'
@@ -53,8 +30,8 @@ export default {
   methods: {
     create () {
       this.intersectionObserver = new IntersectionObserver(
-        // this.callback,
-        ([entry]) => this.callback(entry),
+        // no destructuring because Babel freaks out
+        (entries) => this.callback(entries)[0],
         this.options
       )
     },

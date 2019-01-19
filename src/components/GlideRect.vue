@@ -7,7 +7,14 @@ export default {
   props: {
     callback: {
       type: Function,
-      required: true
+      default: null
+    }
+  },
+  watch: {
+    callback (callback) {
+      if (callback) {
+        this.update()
+      }
     }
   },
   mounted () {
@@ -16,7 +23,10 @@ export default {
   methods: {
     update () {
       this.callback(this.$el.getBoundingClientRect())
-      window.requestAnimationFrame(this.update)
+
+      if (this.callback) {
+        window.requestAnimationFrame(this.update)
+      }
     }
   }
 }

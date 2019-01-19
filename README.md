@@ -22,22 +22,9 @@ yarn run build
 yarn run lint
 ```
 
-### Run your unit tests
-```
-yarn run test:unit
-```
-
-### Run your end-to-end tests
-```
-yarn run test:e2e
-```
-
 ## Examples
 
-- [Intersection](https://github.com/mrcsmcln/vue-glide/tree/dev/examples/intersection)
-- [Animation](https://github.com/mrcsmcln/vue-glide/tree/dev/examples/animation)
-- [Parallax](https://github.com/mrcsmcln/vue-glide/tree/dev/examples/parallax)
-- [Rotation](https://github.com/mrcsmcln/vue-glide/tree/dev/examples/rotation)
-- [Position](https://github.com/mrcsmcln/vue-glide/tree/dev/examples/position)
-- [Visibility](https://github.com/mrcsmcln/vue-glide/tree/dev/examples/visibility)
-- [Video](https://github.com/mrcsmcln/vue-glide/tree/dev/examples/video)
+- [Intersection](https://github.com/mrcsmcln/vue-glide/tree/master/examples/intersection)
+- [Animation](https://github.com/mrcsmcln/vue-glide/tree/master/examples/animation)
+- [Visibility](https://github.com/mrcsmcln/vue-glide/tree/master/examples/visibility)
+- [Position](https://github.com/mrcsmcln/vue-glide/tree/master/examples/position)

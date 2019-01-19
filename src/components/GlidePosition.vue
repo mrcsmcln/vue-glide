@@ -18,8 +18,7 @@ export default {
   },
   data () {
     return {
-      rect: undefined,
-      previousPosition: undefined
+      rect: undefined
     }
   },
   computed: {
@@ -80,7 +79,7 @@ export default {
     update (rect) {
       this.rect = rect
 
-      this.callback(this.position)
+      this.callback(this.position, this.rect)
     }
   }
 }

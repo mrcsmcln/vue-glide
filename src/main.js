@@ -1,5 +1,5 @@
 import GlideRect from './components/GlideRect.vue'
-import GlideParallax from './components/GlideParallax.vue'
+import GlidePointer from './components/GlidePointer.vue'
 import GlidePosition from './components/GlidePosition.vue'
 import GlideAnimation from './components/GlideAnimation.vue'
 import GlideVisibility from './components/GlideVisibility.vue'
@@ -17,7 +17,7 @@ function install (Vue) {
   // Vue = _Vue
 
   Vue.component('GlideRect', GlideRect)
-  Vue.component('GlideParallax', GlideParallax)
+  Vue.component('GlidePointer', GlidePointer)
   Vue.component('GlidePosition', GlidePosition)
   Vue.component('GlideAnimation', GlideAnimation)
   Vue.component('GlideVisibility', GlideVisibility)
@@ -27,7 +27,7 @@ function install (Vue) {
 export default {
   install,
   GlideRect,
-  GlideParallax,
+  GlidePointer,
   GlidePosition,
   GlideAnimation,
   GlideVisibility,

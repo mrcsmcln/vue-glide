@@ -2,49 +2,43 @@
   "name": "vue-glide",
   "version": "0.2.6",
   "description": "motion component library for Vue.js",
-  "main": "dist/vue-glide.common.js",
-  "unpkg": "dist/vue-glide.umd.js",
+  "author": "Marcus McLean",
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build --target lib src/main.js",
+    "lint": "vue-cli-service lint",
+    "docs:build": "vuepress build docs",
+    "docs:dev": "vuepress dev docs",
+    "test:e2e": "vue-cli-service test:e2e",
+    "test:unit": "vue-cli-service test:unit"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "^3.3.0",
+    "@vue/cli-plugin-eslint": "^3.0.0",
+    "@vue/cli-service": "^3.0.0",
+    "@vue/eslint-config-standard": "^3.0.5",
+    "vue-template-compiler": "^2.5.17",
+    "vuepress": "^0.14.4"
+  },
+  "bugs": {
+    "url": "https://github.com/mrcsmcln/vue-glide/issues"
+  },
+  "files": [
+    "dist/*.js",
+    "src/**/*"
+  ],
+  "homepage": "https://github.com/mrcsmcln/vue-glide#readme",
   "keywords": [
     "vue",
     "glide",
     "motion",
     "parallax"
   ],
-  "files": [
-    "dist/*.js",
-    "src/**/*"
-  ],
-  "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build --target lib src/main.js",
-    "lint": "vue-cli-service lint",
-    "test:unit": "vue-cli-service test:unit",
-    "test:e2e": "vue-cli-service test:e2e",
-    "docs:dev": "vuepress dev docs",
-    "docs:build": "vuepress build docs"
-  },
+  "license": "MIT",
+  "main": "dist/vue-glide.common.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/mrcsmcln/vue-glide.git"
   },
-  "author": "Marcus McLean",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/mrcsmcln/vue-glide/issues"
-  },
-  "homepage": "https://github.com/mrcsmcln/vue-glide#readme",
-  "devDependencies": {
-    "@cypress/webpack-preprocessor": "^3.0.0",
-    "@vue/cli-plugin-babel": "^3.0.0",
-    "@vue/cli-plugin-e2e-cypress": "^3.0.0",
-    "@vue/cli-plugin-eslint": "^3.0.0",
-    "@vue/cli-plugin-unit-jest": "^3.0.0",
-    "@vue/cli-service": "^3.0.0",
-    "@vue/eslint-config-standard": "^3.0.5",
-    "@vue/test-utils": "^1.0.0-beta.20",
-    "babel-core": "7.0.0-bridge.0",
-    "babel-jest": "^23.0.1",
-    "vue-template-compiler": "^2.5.17",
-    "vuepress": "^0.14.4"
-  }
+  "unpkg": "dist/vue-glide.umd.js"
 }
