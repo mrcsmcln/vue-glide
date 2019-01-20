@@ -37,10 +37,10 @@
     "motion"
   ],
   "license": "MIT",
-  "main": "dist/vue-glide.common.js",
+  "main": "dist/VueGlide.common.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/mrcsmcln/vue-glide.git"
   },
-  "unpkg": "dist/vue-glide.umd.js"
+  "unpkg": "dist/VueGlide.umd.js"
 }
