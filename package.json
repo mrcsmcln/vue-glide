@@ -5,20 +5,23 @@
   "author": "Marcus McLean",
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build --target lib src/main.js",
+    "build": "vue-cli-service build --target lib --name VueGlide src/main.js",
     "lint": "vue-cli-service lint",
     "docs:build": "vuepress build docs",
-    "docs:dev": "vuepress dev docs",
-    "test:e2e": "vue-cli-service test:e2e",
-    "test:unit": "vue-cli-service test:unit"
+    "docs:dev": "vuepress dev docs"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.3.0",
-    "@vue/cli-plugin-eslint": "^3.0.0",
-    "@vue/cli-service": "^3.0.0",
-    "@vue/eslint-config-standard": "^3.0.5",
-    "vue-template-compiler": "^2.5.17",
-    "vuepress": "^0.14.4"
+    "@vue/cli-plugin-eslint": "^3.3.0",
+    "@vue/cli-service": "^3.3.0",
+    "@vue/eslint-config-standard": "^4.0.0",
+    "babel-eslint": "^10.0.1",
+    "eslint": "^5.8.0",
+    "eslint-plugin-vue": "^5.1.0",
+    "postcss-preset-env": "^6.5.0",
+    "tailwindcss": "^0.7.3",
+    "vue-template-compiler": "^2.5.21",
+    "vuepress": "^0.14.8"
   },
   "bugs": {
     "url": "https://github.com/mrcsmcln/vue-glide/issues"
@@ -31,8 +34,7 @@
   "keywords": [
     "vue",
     "glide",
-    "motion",
-    "parallax"
+    "motion"
   ],
   "license": "MIT",
   "main": "dist/vue-glide.common.js",

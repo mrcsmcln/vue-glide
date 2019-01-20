@@ -4,9 +4,9 @@
 	else if(typeof define === 'function' && define.amd)
 		define([], factory);
 	else if(typeof exports === 'object')
-		exports["vue-glide"] = factory();
+		exports["VueGlide"] = factory();
 	else
-		root["vue-glide"] = factory();
+		root["VueGlide"] = factory();
 })((typeof self !== 'undefined' ? self : this), function() {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
@@ -107,7 +107,7 @@ __webpack_require__.r(__webpack_exports__);
 
 if (typeof window !== 'undefined') {
   var i
-  if ((i = window.document.currentScript) && (i = i.src.match(/(.+\/)[^/]+\.js$/))) {
+  if ((i = window.document.currentScript) && (i = i.src.match(/(.+\/)[^/]+\.js(\?.*)?$/))) {
     __webpack_require__.p = i[1] // eslint-disable-line
   }
 }
@@ -152,22 +152,19 @@ if (typeof window !== 'undefined') {
     }
   },
   watch: {
-    callback: function callback(_callback) {
-      if (_callback) {
-        this.update();
-      }
-    }
+    callback: 'update'
   },
   mounted: function mounted() {
     this.update();
   },
   methods: {
     update: function update() {
-      this.callback(this.$el.getBoundingClientRect());
-
-      if (this.callback) {
-        window.requestAnimationFrame(this.update);
+      if (!this.callback) {
+        return;
       }
+
+      this.callback(this.$el.getBoundingClientRect());
+      window.requestAnimationFrame(this.update);
     }
   }
 });
@@ -289,12 +286,12 @@ var component = normalizeComponent(
 
 component.options.__file = "GlideRect.vue"
 /* harmony default export */ var GlideRect = (component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"f8d4f68e-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/GlidePointer.vue?vue&type=template&id=28f515a8&
-var GlidePointervue_type_template_id_28f515a8_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('GlideRect',{attrs:{"callback":_vm.callback ? _vm.setRect : null}},[_vm._t("default")],2)}
-var GlidePointervue_type_template_id_28f515a8_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"1ed55e01-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/GlidePointer.vue?vue&type=template&id=486b6860&
+var GlidePointervue_type_template_id_486b6860_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('GlideRect',{attrs:{"callback":_vm.callback ? _vm.setRect : null}},[_vm._t("default")],2)}
+var GlidePointervue_type_template_id_486b6860_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/GlidePointer.vue?vue&type=template&id=28f515a8&
+// CONCATENATED MODULE: ./src/components/GlidePointer.vue?vue&type=template&id=486b6860&
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/@vue/cli-plugin-babel/node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/GlidePointer.vue?vue&type=script&lang=js&
 //
@@ -387,16 +384,7 @@ var GlidePointervue_type_template_id_28f515a8_staticRenderFns = []
     }
   },
   watch: {
-    callback: function callback(_callback) {
-      var setMouse = this.setMouse;
-
-      if (!_callback) {
-        window.removeEventListener('mousemove', setMouse);
-        return;
-      }
-
-      window.addEventListener('mousemove', setMouse);
-    },
+    callback: 'init',
     pointer: function pointer(_pointer) {
       this.callback(_pointer);
     }
@@ -407,6 +395,16 @@ var GlidePointervue_type_template_id_28f515a8_staticRenderFns = []
     }
   },
   methods: {
+    init: function init() {
+      var setMouse = this.setMouse;
+
+      if (this.callback) {
+        window.addEventListener('mousemove', setMouse);
+        return;
+      }
+
+      window.removeEventListener('mousemove', setMouse);
+    },
     setRect: function setRect(rect) {
       this.rect = rect;
     },
@@ -427,8 +425,8 @@ var GlidePointervue_type_template_id_28f515a8_staticRenderFns = []
 
 var GlidePointer_component = normalizeComponent(
   components_GlidePointervue_type_script_lang_js_,
-  GlidePointervue_type_template_id_28f515a8_render,
-  GlidePointervue_type_template_id_28f515a8_staticRenderFns,
+  GlidePointervue_type_template_id_486b6860_render,
+  GlidePointervue_type_template_id_486b6860_staticRenderFns,
   false,
   null,
   null,
@@ -438,12 +436,12 @@ var GlidePointer_component = normalizeComponent(
 
 GlidePointer_component.options.__file = "GlidePointer.vue"
 /* harmony default export */ var GlidePointer = (GlidePointer_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"f8d4f68e-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/GlidePosition.vue?vue&type=template&id=539192fd&
-var GlidePositionvue_type_template_id_539192fd_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('GlideRect',{attrs:{"callback":_vm.update}},[_vm._t("default")],2)}
-var GlidePositionvue_type_template_id_539192fd_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"1ed55e01-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/GlidePosition.vue?vue&type=template&id=cf99ed76&
+var GlidePositionvue_type_template_id_cf99ed76_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('GlideRect',{attrs:{"callback":_vm.update}},[_vm._t("default")],2)}
+var GlidePositionvue_type_template_id_cf99ed76_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/GlidePosition.vue?vue&type=template&id=539192fd&
+// CONCATENATED MODULE: ./src/components/GlidePosition.vue?vue&type=template&id=cf99ed76&
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/@vue/cli-plugin-babel/node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/GlidePosition.vue?vue&type=script&lang=js&
 //
@@ -534,8 +532,8 @@ var GlidePositionvue_type_template_id_539192fd_staticRenderFns = []
 
 var GlidePosition_component = normalizeComponent(
   components_GlidePositionvue_type_script_lang_js_,
-  GlidePositionvue_type_template_id_539192fd_render,
-  GlidePositionvue_type_template_id_539192fd_staticRenderFns,
+  GlidePositionvue_type_template_id_cf99ed76_render,
+  GlidePositionvue_type_template_id_cf99ed76_staticRenderFns,
   false,
   null,
   null,
@@ -672,12 +670,12 @@ var GlideAnimation_component = normalizeComponent(
 
 GlideAnimation_component.options.__file = "GlideAnimation.vue"
 /* harmony default export */ var GlideAnimation = (GlideAnimation_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"f8d4f68e-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/GlideVisibility.vue?vue&type=template&id=a3155c24&
-var GlideVisibilityvue_type_template_id_a3155c24_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('GlideIntersection',{class:_vm.className,attrs:{"callback":_vm.callback,"options":_vm.options}},[_vm._t("default")],2)}
-var GlideVisibilityvue_type_template_id_a3155c24_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"1ed55e01-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/GlideVisibility.vue?vue&type=template&id=45fddfc2&
+var GlideVisibilityvue_type_template_id_45fddfc2_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('GlideIntersection',{class:_vm.className,attrs:{"callback":_vm.callback,"options":_vm.options}},[_vm._t("default")],2)}
+var GlideVisibilityvue_type_template_id_45fddfc2_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/GlideVisibility.vue?vue&type=template&id=a3155c24&
+// CONCATENATED MODULE: ./src/components/GlideVisibility.vue?vue&type=template&id=45fddfc2&
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/@vue/cli-plugin-babel/node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/GlideIntersection.vue?vue&type=script&lang=js&
 
@@ -687,7 +685,7 @@ var GlideVisibilityvue_type_template_id_a3155c24_staticRenderFns = []
   props: {
     callback: {
       type: Function,
-      required: true
+      default: null
     },
     options: {
       type: Object,
@@ -698,7 +696,7 @@ var GlideVisibilityvue_type_template_id_a3155c24_staticRenderFns = []
   },
   data: function data() {
     return {
-      intersectionObserver: undefined
+      intersectionObserver: null
     };
   },
   watch: {
@@ -706,16 +704,33 @@ var GlideVisibilityvue_type_template_id_a3155c24_staticRenderFns = []
     callback: 'reset'
   },
   mounted: function mounted() {
-    this.create();
-    this.observe();
+    this.init();
   },
   methods: {
+    init: function init() {
+      this.reset();
+
+      if (!this.callback) {
+        return;
+      }
+
+      this.create();
+      this.observe();
+    },
+    reset: function reset() {
+      if (!this.intersectionObserver) {
+        return;
+      }
+
+      this.disconnect();
+      this.intersectionObserver = null;
+    },
     create: function create() {
       var _this = this;
 
       this.intersectionObserver = new IntersectionObserver( // no destructuring because Babel freaks out
       function (entries) {
-        return _this.callback(entries)[0];
+        return _this.callback(entries[0]);
       }, this.options);
     },
     observe: function observe() {
@@ -723,11 +738,6 @@ var GlideVisibilityvue_type_template_id_a3155c24_staticRenderFns = []
     },
     disconnect: function disconnect() {
       this.intersectionObserver.disconnect();
-    },
-    reset: function reset() {
-      this.disconnect();
-      this.create();
-      this.observe();
     }
   }
 });
@@ -822,10 +832,10 @@ GlideIntersection_component.options.__file = "GlideIntersection.vue"
       }
 
       if (this.previousIsIntersecting) {
-        return this.visibleClass ? this.visibleClass : "".concat(this.name, "-visible");
+        return this.visibleClass || "".concat(this.name, "-visible");
       }
 
-      return this.visibleClass ? this.hiddenClass : "".concat(this.name, "-hidden");
+      return this.hiddenClass || "".concat(this.name, "-hidden");
     }
   },
   methods: {
@@ -904,8 +914,8 @@ GlideIntersection_component.options.__file = "GlideIntersection.vue"
 
 var GlideVisibility_component = normalizeComponent(
   components_GlideVisibilityvue_type_script_lang_js_,
-  GlideVisibilityvue_type_template_id_a3155c24_render,
-  GlideVisibilityvue_type_template_id_a3155c24_staticRenderFns,
+  GlideVisibilityvue_type_template_id_45fddfc2_render,
+  GlideVisibilityvue_type_template_id_45fddfc2_staticRenderFns,
   false,
   null,
   null,
@@ -959,4 +969,4 @@ function install(Vue) {
 
 /******/ })["default"];
 });
-//# sourceMappingURL=vue-glide.umd.js.map
+//# sourceMappingURL=VueGlide.umd.js.map

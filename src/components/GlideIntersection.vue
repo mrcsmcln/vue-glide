@@ -7,7 +7,7 @@ export default {
   props: {
     callback: {
       type: Function,
-      required: true
+      default: null
     },
     options: {
       type: Object,
@@ -16,22 +16,38 @@ export default {
   },
   data () {
     return {
-      intersectionObserver: undefined
+      intersectionObserver: null
     }
   },
   watch: {
-    options: 'reset',
-    callback: 'reset'
+    callback: 'init',
+    options: 'init'
   },
   mounted () {
-    this.create()
-    this.observe()
+    this.init()
   },
   methods: {
+    init () {
+      if (this.intersectionObserver) {
+        this.reset()
+      }
+
+      if (!this.callback) {
+        return
+      }
+
+      this.create()
+      this.observe()
+    },
+    reset () {
+      this.disconnect()
+
+      this.intersectionObserver = null
+    },
     create () {
       this.intersectionObserver = new IntersectionObserver(
         // no destructuring because Babel freaks out
-        (entries) => this.callback(entries)[0],
+        (entries) => this.callback(entries[0]),
         this.options
       )
     },
@@ -40,11 +56,6 @@ export default {
     },
     disconnect () {
       this.intersectionObserver.disconnect()
-    },
-    reset () {
-      this.disconnect()
-      this.create()
-      this.observe()
     }
   }
 }

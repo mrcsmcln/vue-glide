@@ -1,6 +1,6 @@
 <template>
   <GlideRect :callback="callback ? setRect : null">
-    <slot/>
+    <slot />
   </GlideRect>
 </template>
 
@@ -101,27 +101,26 @@ export default {
     }
   },
   watch: {
-    callback (callback) {
-      const { setMouse } = this
-
-      if (!callback) {
-        window.removeEventListener('mousemove', setMouse)
-
-        return
-      }
-
-      window.addEventListener('mousemove', setMouse)
-    },
+    callback: 'init',
     pointer (pointer) {
       this.callback(pointer)
     }
   },
   mounted () {
-    if (this.callback) {
-      window.addEventListener('mousemove', this.setMouse)
-    }
+    this.init()
   },
   methods: {
+    init () {
+      const { setMouse } = this
+
+      if (this.callback) {
+        window.addEventListener('mousemove', setMouse)
+
+        return
+      }
+
+      window.removeEventListener('mousemove', setMouse)
+    },
     setRect (rect) {
       this.rect = rect
     },

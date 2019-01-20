@@ -11,22 +11,19 @@ export default {
     }
   },
   watch: {
-    callback (callback) {
-      if (callback) {
-        this.update()
-      }
-    }
+    callback: 'update'
   },
   mounted () {
     this.update()
   },
   methods: {
     update () {
-      this.callback(this.$el.getBoundingClientRect())
-
-      if (this.callback) {
-        window.requestAnimationFrame(this.update)
+      if (!this.callback) {
+        return
       }
+
+      this.callback(this.$el.getBoundingClientRect())
+      window.requestAnimationFrame(this.update)
     }
   }
 }

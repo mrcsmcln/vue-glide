@@ -4,7 +4,7 @@
     :callback="callback"
     :options="options"
   >
-    <slot/>
+    <slot />
   </GlideIntersection>
 </template>
 
@@ -65,10 +65,10 @@ export default {
       }
 
       if (this.previousIsIntersecting) {
-        return this.visibleClass ? this.visibleClass : `${this.name}-visible`
+        return this.visibleClass || `${this.name}-visible`
       }
 
-      return this.visibleClass ? this.hiddenClass : `${this.name}-hidden`
+      return this.hiddenClass || `${this.name}-hidden`
     }
   },
   methods: {

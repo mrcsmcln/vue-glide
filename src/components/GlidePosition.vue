@@ -1,6 +1,6 @@
 <template>
   <GlideRect :callback="update">
-    <slot/>
+    <slot />
   </GlideRect>
 </template>
 
