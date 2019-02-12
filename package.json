@@ -1,6 +1,6 @@
 {
   "name": "vue-glide",
-  "version": "0.3.2",
+  "version": "0.4.0",
   "description": "motion component library for Vue.js",
   "author": "Marcus McLean",
   "scripts": {
