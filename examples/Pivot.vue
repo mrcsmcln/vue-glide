@@ -57,15 +57,12 @@ export default {
     rotate3d () {
       return `rotate3d(${-this.y}, ${this.x}, 0, ${this.angle}turn)`
     },
-    translate3d () {
-      return `translate3d(${10 * this.x}%, ${10 * this.y}%, 0)`
-    },
     style () {
       if (!this.showPivotEffect) {
         return null
       }
 
-      return { transform: `${this.rotate3d} ${this.translate3d}` }
+      return { transform: `${this.rotate3d}` }
     },
     text () {
       return JSON.stringify(this.pivot, this.replacer, 2)
@@ -127,6 +124,7 @@ pre {
 
 .wrapper {
   position: relative;
+  transform-origin: center center -500px;
 }
 
 .distance,

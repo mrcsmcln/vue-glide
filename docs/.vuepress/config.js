@@ -22,8 +22,9 @@ module.exports = {
         collapsable: false,
         children: [
           '/guide/position',
-          '/guide/intersection',
-          '/guide/animation'
+          '/guide/visibility',
+          '/guide/animation',
+          '/guide/pivot'
         ]
       }
     ]
