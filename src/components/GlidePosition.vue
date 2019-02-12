@@ -79,7 +79,7 @@ export default {
     update (rect) {
       this.rect = rect
 
-      this.callback(this.position, this.rect)
+      this.callback(this.position, rect)
     }
   }
 }

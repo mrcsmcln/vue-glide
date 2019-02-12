@@ -36,27 +36,45 @@ Vue.use(VueGlide)
 
 You don't need to do this when using global script tags.
 
-### Web Animations
+### Web Animations and Intersection Observer
 
-Vue Glide requires [Web Animations](https://developer.mozilla.org/en-US/docs/Web/API/Web_Animations_API) and [Intersection Observer](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API). If your supporting browsers do not implement Web Animations and Intersection Observer (e.g. IE), you can use polyfill libraries, such as [web-animations-js](https://github.com/web-animations/web-animations-js) and [intersection-observer](https://github.com/w3c/IntersectionObserver).
+Vue Glide requires [Web Animations](https://developer.mozilla.org/en-US/docs/Web/API/Web_Animations_API) and [Intersection Observer](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API). If your supporting browsers do not implement Web Animations and Intersection Observer (e.g. IE), you can use polyfill libraries, such as [web-animations-js](https://github.com/web-animations/web-animations-js) and [intersection-observer](https://github.com/w3c/IntersectionObserver/tree/master/polyfill).
 
 You can include them via CDN:
 
 ``` html
-<script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/web-animations-js@2/web-animations.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/intersection-observer@0.5/intersection-observer.js"></script>
 ```
 
-Then `window.Promise` will be available automatically.
+Then `Element.animate()` and `window.IntersectionObserver` will be available automatically.
 
 If you prefer using a package manager such as NPM or Yarn, install it with the following commands:
 
 ``` bash
-npm install es6-promise --save # NPM
-yarn add es6-promise # Yarn
+# NPM
+npm install web-animations-js --save
+npm install intersection-observer --save
+
+# Yarn
+yarn add web-animations-js
+yarn add intersection-observer
 ```
 
-Furthermore, add the below line into anywhere in your code before using Vuex:
+Furthermore, add the below line into anywhere in your code before using Vue Glide:
 
 ``` js
-import 'es6-promise/auto'
+import 'web-animations-js'
+import 'intersection-observer'
+```
+
+### Dev Build
+
+You will have to clone directly from GitHub and build `vue-glide` yourself if you want to use the latest dev build.
+
+```bash
+git clone https://github.com/mrcsmcln/vue-glide.git node_modules/vue-glide
+cd node_modules/vue-glide
+npm install
+npm run build
 ```

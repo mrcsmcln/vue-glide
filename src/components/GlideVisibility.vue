@@ -72,7 +72,8 @@ export default {
     }
   },
   methods: {
-    callback (entry) {
+    callback (entries) {
+      const entry = entries[0]
       const { isIntersecting } = entry
 
       if (this.previousIsIntersecting === undefined && !this.appear) {
