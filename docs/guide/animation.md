@@ -108,5 +108,124 @@ The offset of the keyframe specified as a number between `0.0` and `1.0` inclusi
 #### easing
 The timing function used from this keyframe until the next keyframe in the series.
 
-composite
+#### composite
 The `KeyframeEffect.composite` operation used to combine the values specified in this keyframe with the underlying value. This will be `auto` if the composite operation specified on the effect is being used.
+
+### Reactivity
+
+`<glide-animation>` is reactive. Here's an example of how that can work:
+
+```html
+<input
+  v-model="animation.currentTime"
+  max="1"
+  step="0.001"
+  type="range"
+>
+<glide-animation v-bind="animation">
+  <p>
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt autem enim praesentium molestiae exercitationem velit error laboriosam, corporis a, corrupti, modi aliquid nihil sequi temporibus doloribus. Laudantium libero commodi accusantium.
+  </p>
+</glide-animation>
+```
+
+```js
+data: {
+  animation: {
+    keyframes: {
+      color: ['red', 'green', 'blue']
+    },
+    options: {
+      duration: 1,
+      fill: 'both'
+    },
+    currentTime: 0,
+    playbackRate: 0
+  }
+}
+```
+
+Drag the slider to control the `currentTime` of the animation:
+
+<Animation2 />
+
+For this to work, `playbackRate` should be `0` and `options.fill` should usually be `both`.
+
+Here's another example that leverages `<glide-position>`:
+
+
+```html
+<glide-position :callback="update">
+  <glide-animation v-bind="animation">
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex, officiis libero numquam perferendis quas, laborum a tempore dolores dolor soluta ducimus, delectus rem atque voluptate porro consequatur. Labore, reprehenderit recusandae?
+    </p>
+  </glide-animation>
+</glide-position>
+```
+
+```js
+data () {
+  return {
+    animation: {
+      keyframes: {
+        opacity: [0, 1, 0]
+      },
+      options: 1
+      playbackRate: 0,
+      currentTime: 0,
+    }
+  }
+},
+methods: {
+  update ({ innerHeight }) {
+    this.animation.currentTime = innerHeight
+  }
+}
+```
+
+In the above example, the `opacity` of a paragraph is tied to its position on the page. Here's what that looks like:
+
+<Animation1 />
+
+You can also combine `<glide-animation>` with `<glide-visibility>` to play an animation when an element enters or leaves the viewport:
+
+```html
+<glide-visibility
+  :css="false"
+  :options="{ rootMargin: '-10%' }"
+  @enter="animation.playbackRate = 1"
+  @leave="animation.playbackRate = -1"
+>
+  <glide-animation v-bind="animation">
+    <p>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae fugiat quidem eum distinctio provident placeat similique explicabo culpa error atque sapiente nemo illum, officia, minima nostrum, vel iste voluptatibus est.
+    </p>
+  </glide-animation>
+</glide-visibility>
+```
+
+```js
+data: {
+  animation: {
+    keyframes: {
+      color: ['red', 'blue']
+    },
+    options: {
+      duration: 1000,
+      fill: 'both',
+      easing: 'ease-out'
+    },
+    playbackRate: 0,
+  },
+  visibility: {
+    options: {
+      rootMargin: '-20%'
+    }
+  }
+}
+```
+
+In this example, the element is red when it's hidden and blue when it's visible;
+
+<Animation3 />
