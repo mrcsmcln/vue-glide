@@ -46,13 +46,15 @@ export default {
     },
     create () {
       this.intersectionObserver = new IntersectionObserver(
-        // no destructuring because Babel freaks out
-        (entries) => this.callback(entries[0]),
+        (...args) => this.callback(...args),
         this.options
       )
     },
     observe () {
       this.intersectionObserver.observe(this.$el)
+    },
+    unobserve () {
+      this.intersectionObserver.unobserve(this.$el)
     },
     disconnect () {
       this.intersectionObserver.disconnect()

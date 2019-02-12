@@ -143,19 +143,30 @@ if (typeof window !== 'undefined') {
     }
   },
   watch: {
-    callback: 'update'
-  },
-  mounted: function mounted() {
-    this.update();
-  },
-  methods: {
-    update: function update() {
-      if (!this.callback) {
+    callback: function callback(_callback, oldCallback) {
+      if (_callback && oldCallback) {
         return;
       }
 
-      this.callback(this.$el.getBoundingClientRect());
+      this.init();
+    }
+  },
+  mounted: function mounted() {
+    this.init();
+  },
+  methods: {
+    init: function init() {
       window.requestAnimationFrame(this.update);
+    },
+    update: function update() {
+      var callback = this.callback;
+
+      if (!callback) {
+        return;
+      }
+
+      callback(this.$el.getBoundingClientRect());
+      this.init();
     }
   }
 });
@@ -277,14 +288,14 @@ var component = normalizeComponent(
 
 component.options.__file = "GlideRect.vue"
 /* harmony default export */ var GlideRect = (component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"1ed55e01-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/GlidePointer.vue?vue&type=template&id=486b6860&
-var GlidePointervue_type_template_id_486b6860_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('GlideRect',{attrs:{"callback":_vm.callback ? _vm.setRect : null}},[_vm._t("default")],2)}
-var GlidePointervue_type_template_id_486b6860_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"62c925e8-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/GlidePivot.vue?vue&type=template&id=76695877&
+var GlidePivotvue_type_template_id_76695877_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('GlideRect',{attrs:{"callback":_vm.callback ? _vm.setRect : null}},[_vm._t("default")],2)}
+var GlidePivotvue_type_template_id_76695877_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/GlidePointer.vue?vue&type=template&id=486b6860&
+// CONCATENATED MODULE: ./src/components/GlidePivot.vue?vue&type=template&id=76695877&
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/@vue/cli-plugin-babel/node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/GlidePointer.vue?vue&type=script&lang=js&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/@vue/cli-plugin-babel/node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/GlidePivot.vue?vue&type=script&lang=js&
 //
 //
 //
@@ -292,8 +303,8 @@ var GlidePointervue_type_template_id_486b6860_staticRenderFns = []
 //
 //
 
-/* harmony default export */ var GlidePointervue_type_script_lang_js_ = ({
-  name: 'GlidePointer',
+/* harmony default export */ var GlidePivotvue_type_script_lang_js_ = ({
+  name: 'GlidePivot',
   components: {
     GlideRect: GlideRect
   },
@@ -310,26 +321,19 @@ var GlidePointervue_type_template_id_486b6860_staticRenderFns = []
     };
   },
   computed: {
-    clientX: function clientX() {
-      return this.mouse.clientX / window.innerWidth;
-    },
-    clientY: function clientY() {
-      return this.mouse.clientY / window.innerHeight;
-    },
-    offsetX: function offsetX() {
+    elementX: function elementX() {
       var rect = this.rect;
       return (this.mouse.clientX - rect.left) / rect.width;
     },
-    offsetY: function offsetY() {
+    elementY: function elementY() {
       var rect = this.rect;
       return (this.mouse.clientY - rect.top) / rect.height;
     },
-    angle: function angle() {
-      var divisor = Math.PI * 2;
-      return (Math.atan2(this.distanceY, this.distanceX) + divisor * 1.25) % divisor;
+    viewportX: function viewportX() {
+      return this.mouse.clientX / window.innerWidth;
     },
-    phase: function phase() {
-      return this.angle / (2 * Math.PI);
+    viewportY: function viewportY() {
+      return this.mouse.clientY / window.innerHeight;
     },
     distanceX: function distanceX() {
       var rect = this.rect;
@@ -338,6 +342,13 @@ var GlidePointervue_type_template_id_486b6860_staticRenderFns = []
     distanceY: function distanceY() {
       var rect = this.rect;
       return this.mouse.clientY - (rect.top + rect.height / 2);
+    },
+    angle: function angle() {
+      var divisor = Math.PI * 2;
+      return (Math.atan2(this.distanceY, this.distanceX) + divisor * 1.25) % divisor;
+    },
+    phase: function phase() {
+      return this.angle / (2 * Math.PI);
     },
     distance: function distance() {
       return Math.hypot(this.distanceX, this.distanceY);
@@ -350,6 +361,9 @@ var GlidePointervue_type_template_id_486b6860_staticRenderFns = []
       var angle = this.angle - Math.PI / 2;
       return abs(Math.tan(angle)) <= y / x ? x / abs(Math.cos(angle)) : y / abs(Math.sin(angle));
     },
+    edgeDistance: function edgeDistance() {
+      return this.distance / this.maxDistance;
+    },
     majorDistance: function majorDistance() {
       var rect = this.rect;
       return this.distance / (Math.max(rect.width, rect.height) / 2);
@@ -358,19 +372,16 @@ var GlidePointervue_type_template_id_486b6860_staticRenderFns = []
       var rect = this.rect;
       return this.distance / (Math.min(rect.width, rect.height) / 2);
     },
-    adjustedDistance: function adjustedDistance() {
-      return this.distance / this.maxDistance;
-    },
     pointer: function pointer() {
       return {
         phase: this.phase,
-        clientX: this.clientX,
-        clientY: this.clientY,
-        offsetX: this.offsetX,
-        offsetY: this.offsetY,
+        elementX: this.elementX,
+        elementY: this.elementY,
+        viewportX: this.viewportX,
+        viewportY: this.viewportY,
+        edgeDistance: this.edgeDistance,
         majorDistance: this.majorDistance,
-        minorDistance: this.minorDistance,
-        adjustedDistance: this.adjustedDistance
+        minorDistance: this.minorDistance
       };
     }
   },
@@ -381,15 +392,13 @@ var GlidePointervue_type_template_id_486b6860_staticRenderFns = []
     }
   },
   mounted: function mounted() {
-    if (this.callback) {
-      window.addEventListener('mousemove', this.setMouse);
-    }
+    this.init(this.callback);
   },
   methods: {
-    init: function init() {
+    init: function init(callback) {
       var setMouse = this.setMouse;
 
-      if (this.callback) {
+      if (callback) {
         window.addEventListener('mousemove', setMouse);
         return;
       }
@@ -404,9 +413,9 @@ var GlidePointervue_type_template_id_486b6860_staticRenderFns = []
     }
   }
 });
-// CONCATENATED MODULE: ./src/components/GlidePointer.vue?vue&type=script&lang=js&
- /* harmony default export */ var components_GlidePointervue_type_script_lang_js_ = (GlidePointervue_type_script_lang_js_); 
-// CONCATENATED MODULE: ./src/components/GlidePointer.vue
+// CONCATENATED MODULE: ./src/components/GlidePivot.vue?vue&type=script&lang=js&
+ /* harmony default export */ var components_GlidePivotvue_type_script_lang_js_ = (GlidePivotvue_type_script_lang_js_); 
+// CONCATENATED MODULE: ./src/components/GlidePivot.vue
 
 
 
@@ -414,10 +423,10 @@ var GlidePointervue_type_template_id_486b6860_staticRenderFns = []
 
 /* normalize component */
 
-var GlidePointer_component = normalizeComponent(
-  components_GlidePointervue_type_script_lang_js_,
-  GlidePointervue_type_template_id_486b6860_render,
-  GlidePointervue_type_template_id_486b6860_staticRenderFns,
+var GlidePivot_component = normalizeComponent(
+  components_GlidePivotvue_type_script_lang_js_,
+  GlidePivotvue_type_template_id_76695877_render,
+  GlidePivotvue_type_template_id_76695877_staticRenderFns,
   false,
   null,
   null,
@@ -425,14 +434,14 @@ var GlidePointer_component = normalizeComponent(
   
 )
 
-GlidePointer_component.options.__file = "GlidePointer.vue"
-/* harmony default export */ var GlidePointer = (GlidePointer_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"1ed55e01-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/GlidePosition.vue?vue&type=template&id=cf99ed76&
-var GlidePositionvue_type_template_id_cf99ed76_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('GlideRect',{attrs:{"callback":_vm.update}},[_vm._t("default")],2)}
-var GlidePositionvue_type_template_id_cf99ed76_staticRenderFns = []
+GlidePivot_component.options.__file = "GlidePivot.vue"
+/* harmony default export */ var GlidePivot = (GlidePivot_component.exports);
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"62c925e8-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/GlidePosition.vue?vue&type=template&id=391c0497&
+var GlidePositionvue_type_template_id_391c0497_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('GlideRect',{attrs:{"callback":_vm.update}},[_vm._t("default")],2)}
+var GlidePositionvue_type_template_id_391c0497_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/GlidePosition.vue?vue&type=template&id=cf99ed76&
+// CONCATENATED MODULE: ./src/components/GlidePosition.vue?vue&type=template&id=391c0497&
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/@vue/cli-plugin-babel/node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/GlidePosition.vue?vue&type=script&lang=js&
 //
@@ -507,7 +516,7 @@ var GlidePositionvue_type_template_id_cf99ed76_staticRenderFns = []
   methods: {
     update: function update(rect) {
       this.rect = rect;
-      this.callback(this.position, this.rect);
+      this.callback(this.position, rect);
     }
   }
 });
@@ -523,8 +532,8 @@ var GlidePositionvue_type_template_id_cf99ed76_staticRenderFns = []
 
 var GlidePosition_component = normalizeComponent(
   components_GlidePositionvue_type_script_lang_js_,
-  GlidePositionvue_type_template_id_cf99ed76_render,
-  GlidePositionvue_type_template_id_cf99ed76_staticRenderFns,
+  GlidePositionvue_type_template_id_391c0497_render,
+  GlidePositionvue_type_template_id_391c0497_staticRenderFns,
   false,
   null,
   null,
@@ -661,12 +670,12 @@ var GlideAnimation_component = normalizeComponent(
 
 GlideAnimation_component.options.__file = "GlideAnimation.vue"
 /* harmony default export */ var GlideAnimation = (GlideAnimation_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"1ed55e01-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/GlideVisibility.vue?vue&type=template&id=45fddfc2&
-var GlideVisibilityvue_type_template_id_45fddfc2_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('GlideIntersection',{class:_vm.className,attrs:{"callback":_vm.callback,"options":_vm.options}},[_vm._t("default")],2)}
-var GlideVisibilityvue_type_template_id_45fddfc2_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"62c925e8-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/GlideVisibility.vue?vue&type=template&id=afbe178c&
+var GlideVisibilityvue_type_template_id_afbe178c_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('GlideIntersection',{class:_vm.className,attrs:{"callback":_vm.callback,"options":_vm.options}},[_vm._t("default")],2)}
+var GlideVisibilityvue_type_template_id_afbe178c_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/GlideVisibility.vue?vue&type=template&id=45fddfc2&
+// CONCATENATED MODULE: ./src/components/GlideVisibility.vue?vue&type=template&id=afbe178c&
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/@vue/cli-plugin-babel/node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/GlideIntersection.vue?vue&type=script&lang=js&
 
@@ -691,15 +700,17 @@ var GlideVisibilityvue_type_template_id_45fddfc2_staticRenderFns = []
     };
   },
   watch: {
-    options: 'reset',
-    callback: 'reset'
+    callback: 'init',
+    options: 'init'
   },
   mounted: function mounted() {
     this.init();
   },
   methods: {
     init: function init() {
-      this.reset();
+      if (this.intersectionObserver) {
+        this.reset();
+      }
 
       if (!this.callback) {
         return;
@@ -709,23 +720,21 @@ var GlideVisibilityvue_type_template_id_45fddfc2_staticRenderFns = []
       this.observe();
     },
     reset: function reset() {
-      if (!this.intersectionObserver) {
-        return;
-      }
-
       this.disconnect();
       this.intersectionObserver = null;
     },
     create: function create() {
       var _this = this;
 
-      this.intersectionObserver = new IntersectionObserver( // no destructuring because Babel freaks out
-      function (entries) {
-        return _this.callback(entries[0]);
+      this.intersectionObserver = new IntersectionObserver(function () {
+        return _this.callback.apply(_this, arguments);
       }, this.options);
     },
     observe: function observe() {
       this.intersectionObserver.observe(this.$el);
+    },
+    unobserve: function unobserve() {
+      this.intersectionObserver.unobserve(this.$el);
     },
     disconnect: function disconnect() {
       this.intersectionObserver.disconnect();
@@ -830,7 +839,8 @@ GlideIntersection_component.options.__file = "GlideIntersection.vue"
     }
   },
   methods: {
-    callback: function callback(entry) {
+    callback: function callback(entries) {
+      var entry = entries[0];
       var isIntersecting = entry.isIntersecting;
 
       if (this.previousIsIntersecting === undefined && !this.appear) {
@@ -905,8 +915,8 @@ GlideIntersection_component.options.__file = "GlideIntersection.vue"
 
 var GlideVisibility_component = normalizeComponent(
   components_GlideVisibilityvue_type_script_lang_js_,
-  GlideVisibilityvue_type_template_id_45fddfc2_render,
-  GlideVisibilityvue_type_template_id_45fddfc2_staticRenderFns,
+  GlideVisibilityvue_type_template_id_afbe178c_render,
+  GlideVisibilityvue_type_template_id_afbe178c_staticRenderFns,
   false,
   null,
   null,
@@ -933,7 +943,7 @@ function install(Vue) {
   // }
   // Vue = _Vue
   Vue.component('GlideRect', GlideRect);
-  Vue.component('GlidePointer', GlidePointer);
+  Vue.component('GlidePivot', GlidePivot);
   Vue.component('GlidePosition', GlidePosition);
   Vue.component('GlideAnimation', GlideAnimation);
   Vue.component('GlideVisibility', GlideVisibility);
@@ -943,7 +953,7 @@ function install(Vue) {
 /* harmony default export */ var main = ({
   install: install,
   GlideRect: GlideRect,
-  GlidePointer: GlidePointer,
+  GlidePivot: GlidePivot,
   GlidePosition: GlidePosition,
   GlideAnimation: GlideAnimation,
   GlideVisibility: GlideVisibility,

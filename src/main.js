@@ -1,5 +1,5 @@
 import GlideRect from './components/GlideRect.vue'
-import GlidePointer from './components/GlidePointer.vue'
+import GlidePivot from './components/GlidePivot.vue'
 import GlidePosition from './components/GlidePosition.vue'
 import GlideAnimation from './components/GlideAnimation.vue'
 import GlideVisibility from './components/GlideVisibility.vue'
@@ -17,7 +17,7 @@ function install (Vue) {
   // Vue = _Vue
 
   Vue.component('GlideRect', GlideRect)
-  Vue.component('GlidePointer', GlidePointer)
+  Vue.component('GlidePivot', GlidePivot)
   Vue.component('GlidePosition', GlidePosition)
   Vue.component('GlideAnimation', GlideAnimation)
   Vue.component('GlideVisibility', GlideVisibility)
@@ -27,7 +27,7 @@ function install (Vue) {
 export default {
   install,
   GlideRect,
-  GlidePointer,
+  GlidePivot,
   GlidePosition,
   GlideAnimation,
   GlideVisibility,

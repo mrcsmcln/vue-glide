@@ -11,19 +11,30 @@ export default {
     }
   },
   watch: {
-    callback: 'update'
-  },
-  mounted () {
-    this.update()
-  },
-  methods: {
-    update () {
-      if (!this.callback) {
+    callback (callback, oldCallback) {
+      if (callback && oldCallback) {
         return
       }
 
-      this.callback(this.$el.getBoundingClientRect())
+      this.init()
+    }
+  },
+  mounted () {
+    this.init()
+  },
+  methods: {
+    init () {
       window.requestAnimationFrame(this.update)
+    },
+    update () {
+      const { callback } = this
+
+      if (!callback) {
+        return
+      }
+
+      callback(this.$el.getBoundingClientRect())
+      this.init()
     }
   }
 }
